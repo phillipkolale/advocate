@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phillip's Advocate — Navigating the Law With Confidence</title>
+<meta name="description" content="Phillip's Advocate — legal services in Eldoret, Kenya, spanning litigation, corporate, real estate, family, criminal, immigration, IP and estate planning law." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12151B;
+    --bg-deep: #0C0E12;
+    --panel: #1A1E26;
+    --panel-2: #161920;
+    --bronze: #A9822E;
+    --bronze-soft: rgba(169,130,46,0.16);
+    --line: rgba(232,229,220,0.13);
+    --line-soft: rgba(232,229,220,0.06);
+    --text: #E8E5DC;
+    --text-dim2: #9B978C;
+    --text-faint: #64615A;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 85% -10%, #1E2430 0%, var(--bg) 48%),
+      var(--bg);
+    color: var(--text);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4,.display{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    line-height:1.14;
+    margin:0;
+    letter-spacing:0;
+  }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family:inherit; }
+  ::selection{ background: var(--bronze); color:#12151B; }
+  :focus-visible{ outline:2px solid var(--bronze); outline-offset:3px; }
+
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+
+  .folio{
+    display:flex; align-items:center; gap:14px;
+    font-family:'IBM Plex Mono', monospace; font-weight:500;
+    font-size:12px; color: var(--bronze); margin-bottom:18px;
+    letter-spacing: 0.04em;
+  }
+  .folio::after{ content:""; flex:1; height:1px; background: var(--line); }
+
+  /* ---------- top nav ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(12,14,18,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,56px);
+    height:78px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; cursor:pointer; }
+  .mark{
+    width:36px; height:36px; border:1px solid var(--bronze);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif; font-weight:700; font-size:15px; color: var(--bronze);
+  }
+  .brand-text{ line-height:1.2; }
+  .brand-text strong{ font-family:'Playfair Display', serif; font-size:19px; display:block; font-weight:700; }
+  .brand-text span{ font-size:10.5px; color: var(--text-faint); text-transform:uppercase; letter-spacing:0.07em; }
+
+  nav.links{ display:flex; gap:4px; align-items:center; }
+  nav.links button{
+    background:none; border:none; cursor:pointer;
+    color: var(--text-dim2); font-size:14px; padding:9px 15px; position:relative;
+    transition: color .2s ease;
+  }
+  nav.links button:hover{ color: var(--text); }
+  nav.links button.active{ color: var(--text); }
+  nav.links button.active::after{
+    content:""; position:absolute; left:15px; right:15px; bottom:2px; height:2px; background: var(--bronze);
+  }
+  .nav-cta{ border:1px solid var(--bronze) !important; color: var(--bronze) !important; margin-left:10px; }
+  .nav-cta:hover{ background: var(--bronze) !important; color:#12151B !important; }
+
+  .hamburger{
+    display:none; background:none; border:1px solid var(--line);
+    width:40px; height:40px; cursor:pointer; position:relative;
+  }
+  .hamburger span, .hamburger span::before, .hamburger span::after{
+    content:""; position:absolute; left:10px; right:10px; height:1px; background: var(--text);
+  }
+  .hamburger span{ top:19px; }
+  .hamburger span::before{ top:-6px; }
+  .hamburger span::after{ top:6px; }
+
+  /* ---------- page shell / transitions ---------- */
+  main{ margin-top:78px; }
+  .page{ display:none; min-height:calc(100vh - 78px); padding-bottom:90px; }
+  .page.active{ display:block; }
+  .page.enter{ animation: pageIn .6s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes pageIn{
+    from{ opacity:0; transform: perspective(1200px) rotateX(3deg) translateY(20px); }
+    to{ opacity:1; transform: perspective(1200px) rotateX(0) translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .page.enter{ animation:none; } html{ scroll-behavior:auto; } }
+
+  section{ padding: clamp(58px,8vw,98px) 0; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:46px; border-bottom:1px solid var(--line); padding-bottom:20px;
+  }
+  .section-head h2{ font-size: clamp(28px,3.6vw,40px); }
+  .section-head .idx{ font-size:12px; color: var(--text-faint); white-space:nowrap; padding-bottom:6px; font-family:'IBM Plex Mono',monospace; }
+
+  /* ================= HOME / HERO ================= */
+  .hero{
+    padding-top: clamp(42px,7vw,76px);
+    display:grid; grid-template-columns: 1fr 0.9fr; gap:44px; align-items:center;
+  }
+  .hero-copy h1{ font-size: clamp(32px,4.8vw,50px); }
+  .hero-copy h1 em{ font-style:italic; color: var(--bronze); }
+  .hero-copy .pitch{ margin-top:20px; max-width:50ch; color: var(--text-dim2); font-size:16.5px; }
+  .hero-actions{ margin-top:30px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:'Inter', sans-serif; font-weight:600; font-size:14px; padding:14px 26px;
+    border:1px solid var(--line); cursor:pointer; background:transparent; color: var(--text);
+    transition: border-color .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .btn-primary{ background: var(--bronze); border-color: var(--bronze); color:#12151B; }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost:hover{ border-color: var(--bronze); color: var(--bronze); transform: translateY(-2px); }
+
+  .hero-stats{
+    margin-top:44px; display:grid; grid-template-columns: repeat(4,1fr);
+    border-top:1px solid var(--line); padding-top:22px; gap:10px;
+  }
+  .stat b{ display:block; font-family:'Playfair Display',serif; font-size:clamp(20px,2.4vw,26px); color: var(--bronze); }
+  .stat span{ font-size:11px; color: var(--text-faint); }
+
+  .scale-stage{ position:relative; height: clamp(320px,42vw,470px); }
+  .scale-stage canvas{ width:100%; height:100%; display:block; }
+  .scale-caption{ position:absolute; bottom:6px; left:6px; font-size:11.5px; color: var(--text-faint); font-family:'IBM Plex Mono',monospace; }
+
+  .value-strip{
+    margin-top:66px; border-top:1px solid var(--line); padding-top:40px;
+    display:grid; grid-template-columns: repeat(3,1fr); gap:24px;
+  }
+  .value-item h4{ font-size:19px; margin-bottom:8px; }
+  .value-item p{ font-size:14px; color: var(--text-dim2); }
+
+  /* ================= CARD PRIMITIVES ================= */
+  .card{
+    background: linear-gradient(180deg, var(--panel), var(--bg-deep));
+    border:1px solid var(--line); padding:26px; position:relative;
+    transition: transform .25s ease, border-color .25s ease; will-change: transform;
+  }
+  .card:hover{ border-color: rgba(169,130,46,0.5); }
+
+  /* ================= ABOUT ================= */
+  .about-grid{ display:grid; grid-template-columns: 0.95fr 1.05fr; gap:56px; }
+  .about-lede p{ color: var(--text-dim2); margin-bottom:16px; font-size:16px; }
+  .about-lede p:first-child{
+    font-size:19px; color: var(--text); font-family:'Playfair Display',serif; font-weight:600; line-height:1.5;
+  }
+
+  .subhead{ font-size:12.5px; color: var(--text-faint); margin:56px 0 22px; padding-top:26px; border-top:1px solid var(--line); font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.05em; }
+
+  .mv-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:20px; }
+  .mv-card h4{ font-size:12px; color: var(--bronze); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; font-family:'IBM Plex Mono',monospace; font-weight:500; }
+  .mv-card p{ font-size:14.5px; color: var(--text-dim2); line-height:1.8; }
+
+  .practice-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:18px; perspective:1000px; }
+  .practice-card{ transform: rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)); padding:24px; }
+  .practice-card .num{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color: var(--text-faint); }
+  .practice-card h4{ font-size:18px; margin:10px 0 8px; }
+  .practice-card p{ font-size:14px; color: var(--text-dim2); }
+
+  .notice{ margin-top:36px; padding:16px 18px; border:1px solid var(--line); font-size:13px; color: var(--text-faint); }
+
+  /* ================= LEGAL TEAM ================= */
+  .team-intro{ max-width: 62ch; color: var(--text-dim2); font-size:16px; margin-bottom: 44px; }
+  .team-group{ margin-bottom: 48px; }
+  .team-group-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:20px; }
+  .team-group-head h3{ font-size:20px; }
+  .team-group-head span{ font-size:12px; color: var(--text-faint); font-family:'IBM Plex Mono',monospace; }
+  .team-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:16px; }
+  .team-slot{ padding:22px; text-align:left; border-style:dashed; }
+  .team-slot .avatar{ width:40px; height:40px; border:1px dashed var(--line); border-radius:50%; margin-bottom:14px; display:flex; align-items:center; justify-content:center; color: var(--text-faint); font-size:11px; }
+  .team-slot h4{ font-size:14.5px; color: var(--text-dim2); font-family:'Inter',sans-serif; font-weight:600; }
+  .team-slot span{ font-size:12px; color: var(--text-faint); }
+
+  /* ================= CONTACT ================= */
+  .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; }
+  .contact-list{ margin-top:28px; }
+  .contact-list li{ display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px; gap:14px; }
+  .contact-list li span:first-child{ color: var(--text-faint); font-size:12.5px; white-space:nowrap; }
+  .contact-list li a, .contact-list li span:last-child{ color: var(--text); text-align:right; }
+  .contact-list li a:hover{ color: var(--bronze); }
+
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12.5px; color: var(--text-faint); margin-bottom:8px; }
+  .field input, .field select, .field textarea{
+    width:100%; background: var(--bg-deep); border:1px solid var(--line); color: var(--text);
+    padding:12px 14px; font-family:'Inter',sans-serif; font-size:14.5px; resize:vertical;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--bronze); outline:none; }
+  .form-msg{ font-size:13px; color: var(--bronze); margin-top:10px; min-height:16px; }
+  .confidentiality-note{ margin-top:14px; font-size:12.5px; color: var(--text-faint); }
+
+  footer{ border-top:1px solid var(--line); padding: 46px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:32px; margin-bottom:32px; }
+  .footer-grid h5{ font-family:'Playfair Display',serif; font-size:14.5px; color: var(--bronze); margin-bottom:14px; font-weight:600; }
+  .footer-grid li{ font-size:13.5px; color: var(--text-dim2); padding:5px 0; }
+  .footer-grid a:hover{ color: var(--bronze); }
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:20px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12px; color: var(--text-faint);
+  }
+  .footer-bottom a{ color: var(--text-dim2); }
+  .footer-bottom a:hover{ color: var(--bronze); }
+
+  @media (max-width:900px){
+    nav.links{
+      position:fixed; top:78px; left:0; right:0; background: var(--bg-deep);
+      border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch;
+      padding:10px 20px 20px; display:none;
+    }
+    nav.links.open{ display:flex; }
+    nav.links button{ text-align:left; padding:13px 4px; border-bottom:1px solid var(--line-soft); }
+    .nav-cta{ margin:10px 0 0; text-align:center; }
+    .hamburger{ display:block; }
+
+    .hero{ grid-template-columns:1fr; }
+    .hero-stats{ grid-template-columns: repeat(2,1fr); row-gap:22px; }
+    .value-strip{ grid-template-columns: 1fr; }
+    .about-grid, .contact-grid{ grid-template-columns:1fr; }
+    .mv-grid, .practice-grid{ grid-template-columns: 1fr; }
+    .team-grid{ grid-template-columns: 1fr 1fr; }
+    .footer-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .team-grid, .footer-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="brand" data-nav="home">
+      <div class="mark">PA</div>
+      <div class="brand-text">
+        <strong>Phillip's Advocate</strong>
+        <span>Eldoret, Kenya</span>
+      </div>
+    </div>
+    <nav class="links" id="navLinks">
+      <button data-nav="home" class="active">Home</button>
+      <button data-nav="about">About Us</button>
+      <button data-nav="team">Legal Team</button>
+      <button data-nav="contact" class="nav-cta">Consult Us</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <section class="page active" id="page-home" data-page="home">
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="folio">Eldoret, Kenya</p>
+          <h1>Navigating the law with <em>confidence</em> and clarity.</h1>
+          <p class="pitch">Welcome to Phillip's Advocate, where we strive to provide the highest quality legal services to our clients. Our team has experience across several areas of law, and we're committed to advocating for our clients' best interests — with personalised attention, from the first consultation to the final outcome.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="contact">Schedule a consultation</button>
+            <button class="btn btn-ghost" data-nav="about">Our practice areas</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><b>8</b><span>Areas of practice</span></div>
+            <div class="stat"><b>Client-</b><span>Focused approach</span></div>
+            <div class="stat"><b>Results-</b><span>Driven outcomes</span></div>
+            <div class="stat"><b>Personal</b><span>Attention, every case</span></div>
+          </div>
+        </div>
+
+        <div class="scale-stage" id="scaleStage" aria-hidden="true">
+          <canvas id="scaleCanvas"></canvas>
+          <p class="scale-caption">Weighed carefully, argued clearly.</p>
+        </div>
+      </div>
+
+      <p class="subhead">Client-focused, results-driven</p>
+      <div class="value-strip">
+        <div class="value-item"><h4>Best law practices</h4><p>Every case approached with a thorough understanding of the client's needs, not a boilerplate strategy.</p></div>
+        <div class="value-item"><h4>Efficiency &amp; trust</h4><p>We build real relationships with clients, and work tirelessly toward the best possible outcome.</p></div>
+        <div class="value-item"><h4>Results you deserve</h4><p>Legal matters are stressful enough — we handle the complexity so you don't have to.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="page" id="page-about" data-page="about">
+    <div class="wrap">
+      <div class="section-head"><h2>Our Firm</h2><span class="idx">Experienced advocacy</span></div>
+
+      <div class="about-grid">
+        <div class="about-lede">
+          <p>Experienced advocacy for complex cases.</p>
+          <p>We understand that legal matters can be complex and overwhelming. That's why we approach each case with personalised attention and a thorough understanding of what our clients actually need.</p>
+          <p>We believe in building strong relationships with our clients, and we work tirelessly to reach the best possible outcome — not just the fastest one.</p>
+        </div>
+        <div class="mv-grid">
+          <div class="card mv-card">
+            <h4>Mission</h4>
+            <p>To provide clients with the highest quality legal services while holding to the highest ethical standards — protecting their rights and interests with personalised attention throughout their legal journey.</p>
+          </div>
+          <div class="card mv-card">
+            <h4>Vision</h4>
+            <p>To be a leading firm recognised for exceptional representation and professionalism — attracting strong talent, and using that strength to promote justice and social responsibility in the community we serve.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="subhead">Our legal services</p>
+      <div class="practice-grid">
+        <div class="card practice-card"><span class="num">§ 01</span><h4>Litigation</h4><p>Taking legal action in court to settle disputes — personal injury, commercial disputes, employment issues and more.</p></div>
+        <div class="card practice-card"><span class="num">§ 02</span><h4>Corporate Law</h4><p>Advising businesses on formation, governance, contracts, intellectual property, and mergers &amp; acquisitions.</p></div>
+        <div class="card practice-card"><span class="num">§ 03</span><h4>Real Estate Law</h4><p>Handling the buying, selling, leasing and financing of real estate property.</p></div>
+        <div class="card practice-card"><span class="num">§ 04</span><h4>Family Law</h4><p>Divorce, child custody, child support, adoption and other family-related matters.</p></div>
+        <div class="card practice-card"><span class="num">§ 05</span><h4>Criminal Law</h4><p>Defending individuals accused of criminal offences, from investigation through trial.</p></div>
+        <div class="card practice-card"><span class="num">§ 06</span><h4>Immigration Law</h4><p>Assisting individuals and businesses with visas, citizenship and immigration matters.</p></div>
+        <div class="card practice-card"><span class="num">§ 07</span><h4>Intellectual Property</h4><p>Patents, trademarks, copyrights and other intellectual property matters.</p></div>
+        <div class="card practice-card"><span class="num">§ 08</span><h4>Estate Planning</h4><p>Wills, trusts and other documents to plan for the distribution of assets.</p></div>
+      </div>
+
+      <p class="notice">Mission and vision statements above are carried over from your original site, tightened for length — review the wording before publishing to be sure it still reflects the firm accurately.</p>
+    </div>
+  </section>
+
+  <!-- ================= LEGAL TEAM ================= -->
+  <section class="page" id="page-team" data-page="team">
+    <div class="wrap">
+      <div class="section-head"><h2>The Team</h2><span class="idx">Advocates, admin &amp; consultants</span></div>
+      <p class="team-intro">Your original Legal Team page had photo slots but no names or bios attached — rather than invent attorneys and credentials for a law firm, we've left these as open slots. Fill them in with your real team before publishing; misrepresenting legal staff is the one place on this whole project worth being extra careful about.</p>
+
+      <div class="team-group">
+        <div class="team-group-head"><h3>Advocates</h3><span>4 slots</span></div>
+        <div class="team-grid" id="advocateGrid"></div>
+      </div>
+      <div class="team-group">
+        <div class="team-group-head"><h3>Administrative</h3><span>4 slots</span></div>
+        <div class="team-grid" id="adminGrid"></div>
+      </div>
+      <div class="team-group">
+        <div class="team-group-head"><h3>Consultants</h3><span>4 slots</span></div>
+        <div class="team-grid" id="consultGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="page" id="page-contact" data-page="contact">
+    <div class="wrap">
+      <div class="section-head"><h2>Schedule a Consultation</h2><span class="idx">Reach us</span></div>
+
+      <div class="contact-grid">
+        <div>
+          <p style="max-width:44ch; color:var(--text-dim2); font-size:16px;">Tell us briefly what you need, and we'll get back to you to arrange a consultation.</p>
+
+          <ul class="contact-list">
+            <li><span>Phone</span><a href="tel:+254707385519">+254 707 385 519</a></li>
+            <li><span>Alt. phone</span><a href="tel:+254110943805">+254 110 943 805</a></li>
+            <li><span>Email</span><a href="mailto:phillipsadv@outlook.com">phillipsadv@outlook.com</a></li>
+            <li><span>Office</span><span>Muscco Towers, Eldoret, Kenya</span></li>
+          </ul>
+
+          <p class="confidentiality-note">Sending a message here does not, by itself, create an attorney-client relationship.</p>
+        </div>
+
+        <div>
+          <form id="contactForm">
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" required placeholder="Your full name">
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" required placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="cf-area">Area of law</label>
+              <select id="cf-area">
+                <option>Litigation</option>
+                <option>Corporate Law</option>
+                <option>Real Estate Law</option>
+                <option>Family Law</option>
+                <option>Criminal Law</option>
+                <option>Immigration Law</option>
+                <option>Intellectual Property</option>
+                <option>Estate Planning</option>
+                <option>Not sure</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" rows="5" required placeholder="A brief summary of your matter"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-msg" id="formMsg"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>Phillip's Advocate</h5>
+        <p style="font-size:13.5px; color:var(--text-dim2); max-width:32ch;">Navigating the law with confidence and clarity — legal services in Eldoret, Kenya.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#" data-nav="home">Home</a></li>
+          <li><a href="#" data-nav="about">About Us</a></li>
+          <li><a href="#" data-nav="team">Legal Team</a></li>
+          <li><a href="#" data-nav="contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Find Us</h5>
+        <ul>
+          <li>Muscco Towers, Eldoret</li>
+          <li>+254 707 385 519</li>
+          <li>phillipsadv@outlook.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Phillip's Advocate.</span>
+      <span>Site by <a href="https://phillipkolale.github.io/apluswebsiteandgraphicsdevelopers/Home.html" target="_blank" rel="noopener">A+ Website &amp; Graphics Developers</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- Navigation ---------------- */
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.getElementById('navLinks');
+  const hamburger = document.getElementById('hamburger');
+
+  function goTo(name){
+    document.querySelectorAll('#navLinks button').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+    pages.forEach(p => {
+      if(p.dataset.page === name){
+        p.classList.add('active'); p.classList.remove('enter');
+        void p.offsetWidth; p.classList.add('enter');
+      } else { p.classList.remove('active'); }
+    });
+    navLinks.classList.remove('open');
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('[data-nav]').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); goTo(btn.dataset.nav); }));
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  function applyTilt(card){
+    if(reduceMotion) return;
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--rx', (x * 6).toFixed(2) + 'deg');
+      card.style.setProperty('--ry', (-y * 6).toFixed(2) + 'deg');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
+    });
+  }
+  document.querySelectorAll('.practice-card').forEach(applyTilt);
+
+  /* ---------------- Team placeholder slots ---------------- */
+  function buildSlots(gridId, role, count){
+    const grid = document.getElementById(gridId);
+    for(let i=0;i<count;i++){
+      const div = document.createElement('div');
+      div.className = 'card team-slot';
+      div.innerHTML = `<div class="avatar">+</div><h4>Add ${role}</h4><span>Name &amp; title</span>`;
+      grid.appendChild(div);
+    }
+  }
+  buildSlots('advocateGrid', 'Advocate', 4);
+  buildSlots('adminGrid', 'Staff Member', 4);
+  buildSlots('consultGrid', 'Consultant', 4);
+
+  /* ---------------- Contact form (mailto) ---------------- */
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const area = document.getElementById('cf-area').value;
+    const message = document.getElementById('cf-message').value;
+    const body = `From: ${name} (${email})\nArea of law: ${area}\n\n${message}`;
+    window.location.href = `mailto:phillipsadv@outlook.com?subject=${encodeURIComponent('Consultation request: ' + area)}&body=${encodeURIComponent(body)}`;
+    document.getElementById('formMsg').textContent = 'Opening your email client…';
+  });
+
+  /* ================= 3D scales of justice (Three.js hero) ================= */
+  (function(){
+    const stage = document.getElementById('scaleStage');
+    const canvas = document.getElementById('scaleCanvas');
+    if(!window.THREE || !stage || !canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, stage.clientWidth / stage.clientHeight, 0.1, 100);
+    camera.position.set(0, 0.6, 4.8);
+    camera.lookAt(0, 0.1, 0);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const bronzeMat = new THREE.LineBasicMaterial({ color: 0xA9822E, transparent:true, opacity:0.8 });
+    const bronzeMatSoft = new THREE.LineBasicMaterial({ color: 0xA9822E, transparent:true, opacity:0.4 });
+
+    // base + post
+    const baseGeo = new THREE.CylinderGeometry(0.5, 0.6, 0.08, 24);
+    const base = new THREE.LineSegments(new THREE.EdgesGeometry(baseGeo), bronzeMat);
+    base.position.y = -1.1;
+    group.add(base);
+
+    const postGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.9, 12);
+    const post = new THREE.LineSegments(new THREE.EdgesGeometry(postGeo), bronzeMat);
+    post.position.y = -0.15;
+    group.add(post);
+
+    // pivoting beam group (this is what sways)
+    const beamGroup = new THREE.Group();
+    beamGroup.position.y = 0.78;
+    group.add(beamGroup);
+
+    const beamGeo = new THREE.CylinderGeometry(0.025, 0.025, 2.3, 10);
+    beamGeo.rotateZ(Math.PI/2);
+    const beam = new THREE.LineSegments(new THREE.EdgesGeometry(beamGeo), bronzeMat);
+    beamGroup.add(beam);
+
+    // pans, each in its own group hanging from beam ends
+    function makePan(x){
+      const panGroup = new THREE.Group();
+      panGroup.position.set(x, 0, 0);
+      beamGroup.add(panGroup);
+
+      const chainGeo = new THREE.CylinderGeometry(0.01, 0.01, 0.55, 6);
+      const chain = new THREE.LineSegments(new THREE.EdgesGeometry(chainGeo), bronzeMatSoft);
+      chain.position.y = -0.28;
+      panGroup.add(chain);
+
+      const panGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.04, 24);
+      const pan = new THREE.LineSegments(new THREE.EdgesGeometry(panGeo), bronzeMat);
+      pan.position.y = -0.56;
+      panGroup.add(pan);
+
+      return panGroup;
+    }
+    makePan(-1.15);
+    makePan(1.15);
+
+    group.rotation.x = -0.05;
+
+    let t = 0;
+    let raf;
+    function animate(){
+      raf = requestAnimationFrame(animate);
+      if(!reduceMotion){
+        t += 0.012;
+        beamGroup.rotation.z = Math.sin(t) * 0.06;
+        group.rotation.y = Math.sin(t*0.25) * 0.18;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function onResize(){
+      const w = stage.clientWidth, h = stage.clientHeight;
+      if(!w || !h) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', onResize);
+    onResize();
+  })();
+</script>
+</body>
+</html>
